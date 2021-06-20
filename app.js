@@ -2,16 +2,16 @@
 
 
 
-let imgArray = ['img/bag.jpg', '/img/banana.jpg', '/img/bathroom.jpg', '/img/boots.jpg', '/img/breakfast.jpg', '/img/bubblegum.jpg', '/img/chair.jpg', '/img/cthulhu.jpg', '/img/dog-duck.jpg',
-    '/img/dargon.jpg', '/img/ pen.jpg', '/img/pet-sweep.jpg', '/img/scissors.jpg', '/img/shark.jpg', '/img/sweep.pnj', '/img/tauntaun.jpg', '/img/unicorn.jpg', '/img/usb.gif', '/img/water-can.jpg', '/img/wine-glass.jpg'];
+let imgArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg',
+    'dargon.jpg','pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.pnj', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
     let counter=0;
 let imageSection = document.getElementById('imageSection');
 let leftImage = document.getElementById('leftImage');
 let centerImage = document.getElementById('centerImage');
 let rightImage = document.getElementById('rightImage');
-function goods(goodsName, src,view) {
+function goods(goodsName, src) {
     this.goodsName = goodsName;
-    this.src = `/img /${src}`;
+    this.src =`./img/${src}`;
     this.view = 0;
     goods.all.push(this);
 }
@@ -24,14 +24,14 @@ for (let i = 0; i < imgArray.length; i++) {
 }
 function render() {
     let leftIndex = randomNumber(0, imgArray.length - 1);
-    let centerIndex;
-    let rightIndex;
+    let centerIndex=randomNumber(0,imgArray.length -1);
+    let rightIndex=randomNumber(0 , imgArray.length -1);
 
 }
 function render() {
-    let leftIndex = randomNumber(0, imgArray.length - 1);
-    let centerIndex=randomNumber(0, imgArray.length-1)
-    let rightIndex=randomNumber(0, imgArray.length-1)
+    let leftIndex = randomNumber(0, imgArray.length-1);
+    let centerIndex=randomNumber(0, imgArray.length-1);
+    let rightIndex=randomNumber(0, imgArray.length-1);
    
 
     do {
@@ -49,11 +49,12 @@ function render() {
 function eventHandler(e) {
 
     if ((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'centerImage') && counter < 25) {
-     //   render();
+      render();
         counter++;
     }
 }
 imageSection.addEventListener('click', eventHandler);
+
 
 
 function randomNumber( min, max ) {
@@ -62,3 +63,4 @@ function randomNumber( min, max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) + min ); 
   }
   render();
+  
