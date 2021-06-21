@@ -46,7 +46,7 @@ function render() {
     } 
     while (leftIndex === rightIndex === centerIndex);{
 
-    leftImage.src= goods.all[rightIndex].path;
+    leftImage.src= goods.all[leftIndex].path;
     centerImage.src = goods.all[centerIndex].path;
     rightImage.src= goods.all[leftIndex].path;
 
