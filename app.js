@@ -36,7 +36,7 @@ function render() {
      centerIndex ;
      rightIndex ;
 
-}
+
 
 
     do {
@@ -54,13 +54,11 @@ function render() {
     goods.all[centerIndex].view++;
     goods.all[leftIndex].view++;
 }
-
+}
 function clickFunction(event){
     if ((event.target.id==='leftImage' || event.target.id==='centerImage' || event.target.id==='rightImage') && counter<round)
     {
        
-    }
-
 if (event.target.id==='leftImage'){
     goods.all[leftIndex].click++;
 }
@@ -71,9 +69,11 @@ if ( event.target.id==='centerImage'){
 if(event.target.id ==='rightImage'){
     goods.all[rightIndex].click++;
 }
-}
+    }
 render ();
 counter++;
+}
+
 function printResult(e){
     for ( let i=0 ;i<goods.all.length ;i++){
         let goodsName=imgArray[i].split('.')[0];
@@ -81,7 +81,7 @@ function printResult(e){
     listOfResult.appendChild(li);
     li.textContent=`${goods.all[i].goodsName} had ${goods.all[i].click} votes, and was seen ${goods.all[i].view} times.`
 }
-viewresult.removeEventListener('click',printResult);
+viewresult.removeEventListener('click', printResult);
 }
  imageSection.addEventListener('click', clickFunction);
  viewResult.addEventListener('click' , printResult);
