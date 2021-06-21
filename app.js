@@ -16,9 +16,9 @@ let rightImage = document.getElementById('rightImage');
 let viewresult = document.getElementById('viewResult');
 let listOfResult=document.getElementById('listOfResult');
 
-function goods(goodsName, src) {
+function goods(goodsName, path) {
     this.goodsName = goodsName;
-    this.src = `./img/${src}`;
+    this.path= `./img/${path}`;
     this.view = 0;
     this.click = 0;
     goods.all.push(this);
@@ -46,9 +46,9 @@ function render() {
     } 
     while (leftIndex === rightIndex === centerIndex);{
 
-    leftImage.src= goods.all[rightIndex].src;
-    centerImage.src = goods.all[centerIndex].src;
-    rightImage.src= goods.all[leftIndex].src;
+    leftImage.src= goods.all[rightIndex].path;
+    centerImage.src = goods.all[centerIndex].path;
+    rightImage.src= goods.all[leftIndex].path;
 
     goods.all[rightIndex].view++;
     goods.all[centerIndex].view++;
