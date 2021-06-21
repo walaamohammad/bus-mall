@@ -3,64 +3,91 @@
 
 
 let imgArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg',
-    'dargon.jpg','pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.pnj', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-    let counter=0;
+    'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+let counter = 0;
+let round=25;
+let leftIndex;
+let centerIndex;
+let rightIndex ;
 let imageSection = document.getElementById('imageSection');
 let leftImage = document.getElementById('leftImage');
 let centerImage = document.getElementById('centerImage');
 let rightImage = document.getElementById('rightImage');
+let viewresult = document.getElementById('viewResult');
+let listOfResult=document.getElementById('listOfResult');
+
 function goods(goodsName, src) {
     this.goodsName = goodsName;
-    this.src =`./img/${src}`;
+    this.src = `./img/${src}`;
     this.view = 0;
+    this.click = 0;
     goods.all.push(this);
 }
 goods.all = [];
 
 
-for (let i = 0; i < imgArray.length; i++) {
-    // console.log(imgArray[i].split( '.' ));
-    new goods(imgArray[i].split('.')[0], imgArray[i]);
+for (let i = 0; i <imgArray.length; i++) {
+    let goodsName=imgArray[i].split('.')[0];
+    new goods(goodsName, imgArray[i]);
 }
+console.log(goods.all);
 function render() {
-    let leftIndex = randomNumber(0, imgArray.length - 1);
-    let centerIndex=randomNumber(0,imgArray.length -1);
-    let rightIndex=randomNumber(0 , imgArray.length -1);
+    leftIndex = randomNumber(0, imgArray.length - 1);
+     centerIndex ;
+     rightIndex ;
 
 }
-function render() {
-    let leftIndex = randomNumber(0, imgArray.length-1);
-    let centerIndex=randomNumber(0, imgArray.length-1);
-    let rightIndex=randomNumber(0, imgArray.length-1);
-   
+
 
     do {
         rightIndex = randomNumber(0, imgArray.length - 1);
-    } while (leftIndex === rightIndex ===centerIndex);
+        centerIndex=randomNumber(0,imgArray.length-1);
+        leftIndex=randomNumber(0,imgArray.length-1);
+    } 
+    while (leftIndex === rightIndex === centerIndex);{
 
-    rightImage.src = goods.all[rightIndex].src;
+    leftImage.src= goods.all[rightIndex].src;
     centerImage.src = goods.all[centerIndex].src;
-    leftImage.src = goods.all[leftIndex].src;
+    rightImage.src= goods.all[leftIndex].src;
 
-   goods.all[rightIndex].view++;
+    goods.all[rightIndex].view++;
     goods.all[centerIndex].view++;
- goods.all[leftIndex].view++;
+    goods.all[leftIndex].view++;
 }
-function eventHandler(e) {
 
-    if ((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'centerImage') && counter < 25) {
-      render();
-        counter++;
+function clickFunction(event){
+    if ((event.target.id==='leftImage' || event.target.id==='centerImage' || event.target.id==='rightImage') && counter<round)
+    {
+       
     }
+
+if (event.target.id==='leftImage'){
+    goods.all[leftIndex].click++;
 }
-imageSection.addEventListener('click', eventHandler);
+if ( event.target.id==='centerImage'){
+    goods.all[centerIndex].click++;
 
-
-
-function randomNumber( min, max ) {
-    min = Math.ceil( min );
-    max = Math.floor( max );
-    return Math.floor( Math.random() * ( max - min + 1 ) + min ); 
-  }
-  render();
-  
+}
+if(event.target.id ==='rightImage'){
+    goods.all[rightIndex].click++;
+}
+}
+render ();
+counter++;
+function printResult(e){
+    for ( let i=0 ;i<goods.all.length ;i++){
+        let goodsName=imgArray[i].split('.')[0];
+    let li =document.createElement('li');
+    listOfResult.appendChild(li);
+    li.textContent=`${goods.all[i].goodsName} had ${goods.all[i].click} votes, and was seen ${goods.all[i].view} times.`
+}
+viewresult.removeEventListener('click',printResult);
+}
+ imageSection.addEventListener('click', clickFunction);
+ viewResult.addEventListener('click' , printResult);
+ function randomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+render();
