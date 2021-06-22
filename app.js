@@ -48,7 +48,7 @@ function render() {
 
     leftImage.src= Goods.all[leftIndex].path;
     centerImage.src = Goods.all[centerIndex].path;
-    rightImage.src= Goods.all[leftIndex].path;
+    rightImage.src= Goods.all[rightIndex].path;
 
     Goods.all[rightIndex].view++;
     Goods.all[centerIndex].view++;
@@ -113,14 +113,14 @@ var myChart = new Chart(ctx, {
             label: '# of click',
             data: click1,
             backgroundColor: 
-                'rgba(255, 99, 132, 0.2)',
+                'rgba(157, 99, 365, 37)',
            
         },
             {
                 label: '# of view',
                 data: view1,
                 backgroundColor: 
-                    'rgba(255, 99, 12, 0.2)',  
+                    'rgba(264, 34, 574, 0.66)',  
             
         },
         ]
