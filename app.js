@@ -70,6 +70,7 @@ if(event.target.id ==='rightImage'){
     goods.all[rightIndex].click++;
 }
     }
+    localStorage.setItem('products', JSON.stringify(goods.all));
 render ();
 counter++;
 }
@@ -83,6 +84,18 @@ function printResult(e){
 }
 viewresult.removeEventListener('click', printResult);
 }
+function getData() {
+    let data = JSON.parse(localStorage.getItem('imgArray'));
+    if (data) {
+      goods.all = [];
+        for (let i = 0; i < data.length; i++) {
+            new Images(data[i].goodsName, data[i].path, data[i].click, data[i].view);
+        }
+
+    }
+}
+getData();
+
  imageSection.addEventListener('click', clickFunction);
  viewResult.addEventListener('click' , printResult);
  function randomNumber(min, max) {
@@ -91,3 +104,5 @@ viewresult.removeEventListener('click', printResult);
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 render();
+
+//______________________________________function________________________________//
