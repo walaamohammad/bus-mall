@@ -67,10 +67,17 @@ if ( event.target.id==='centerImage'){
 
 }
 if(event.target.id ==='rightImage'){
+
+    goods.all[rightIndex].click++;
+}
+    }
+    localStorage.setItem('products', JSON.stringify(goods.all));
+
     Goods.all[rightIndex].click++;
-}counter++;
+}
+
 render ();
-    } else if(counter===round){
+    counter++;
 
 
 drawChart();
@@ -85,6 +92,18 @@ function printResult(e){
 }
 viewresult.removeEventListener('click', printResult);
 }
+function getData() {
+    let data = JSON.parse(localStorage.getItem('imgArray'));
+    if (data) {
+      goods.all = [];
+        for (let i = 0; i < data.length; i++) {
+            new Images(data[i].goodsName, data[i].path, data[i].click, data[i].view);
+        }
+
+    }
+}
+getData();
+
  imageSection.addEventListener('click', clickFunction);
  viewResult.addEventListener('click' , printResult);
  function randomNumber(min, max) {
@@ -95,42 +114,3 @@ viewresult.removeEventListener('click', printResult);
 render();
 
 
-function drawChart(){
-let name1=[];
-let click1=[];
-let view1=[];
-for (let i =0; i<Goods.all.length;i++){
-name1.push(Goods.all[i].goodsName);
-click1.push(Goods.all[i].click);
-view1.push(Goods.all[i].view);
-}
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: name1,
-        datasets: [{
-            label: '# of click',
-            data: click1,
-            backgroundColor: 
-                'rgba(157, 99, 365, 37)',
-           
-        },
-            {
-                label: '# of view',
-                data: view1,
-                backgroundColor: 
-                    'rgba(264, 34, 574, 0.66)',  
-            
-        },
-        ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-}
